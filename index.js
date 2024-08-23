@@ -1,3 +1,9 @@
+//  .env :
+//    MONGO_URI=mongodb+srv://abdellino9:IUK8EqsFNUlT1Rg4@cluster0.acxyh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+//    JWT_SECRET=abdellinoStore
+
+
+
 import express from "express";
 import mongoose from "mongoose";
 import 'dotenv/config'; // Assurez-vous que dotenv est correctement configuré
