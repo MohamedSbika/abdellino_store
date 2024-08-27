@@ -6,6 +6,7 @@ import React,{useEffect} from "react";
 import bg from '../img/bg-header.png'
 import Card from "../components/Card";
 import { NewProduct } from "../components/NewProduct";
+import BlockService from "../components/BlockService";
 
 
 
@@ -22,6 +23,7 @@ function Homee() {
         <NewProduct/>
         <Card1/>
          <HomeStore/>
+         <BlockService/>
         <Footer/>
        </div>
     </div>

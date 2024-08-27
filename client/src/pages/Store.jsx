@@ -73,9 +73,9 @@ const Store = () =>{
 
     return (
         <>
-            <section  >
+        <div className='h-24 w-full bg-white'></div>
+            <section className='pt-32' >                
                 <div ref={scrollRef}>
-                <div className='h-[84px] w-full bg-white'></div>
                 <div className='grid  md:grid-cols-2 lg:grid-cols-3 '>
                         <div className=' text-xl col-span-1 flex items-center text-center justify-center pb-4 md:text-5xl font-bold '>
                              NOTRE STORE

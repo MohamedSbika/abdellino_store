@@ -78,7 +78,7 @@ const HomeService = () => {
       return (
         < section >
             <div
-                className="mx-auto  p-6"
+                className="mx-auto  p-6 bg-white"
             >
                 <div className="content">
                     <h2 className='text-center text-3xl font-bold sm:text-5xl font-roboto  text-black '>
