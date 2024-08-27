@@ -75,7 +75,7 @@ const Store = () =>{
         <>
             <section  >
                 <div ref={scrollRef}>
-                <img src={bg} className="h-32 w-full "/>
+                <div className='h-[84px] w-full bg-white'></div>
                 <div className='grid  md:grid-cols-2 lg:grid-cols-3 '>
                         <div className=' text-xl col-span-1 flex items-center text-center justify-center pb-4 md:text-5xl font-bold '>
                              NOTRE STORE
@@ -120,7 +120,7 @@ const Store = () =>{
 
                                                             {/* prev Btn  */}
                                                             <button
-                      className="join-item btn bg-red-500 text-white hover:bg-red-500/90 
+                      className="join-item btn bg-black text-white
                                                     disabled:bg-[#d5d5d5] disabled:text-[#a0a0a0]
                                                     "
                       onClick={handlePrevPage}
@@ -130,14 +130,14 @@ const Store = () =>{
                     </button>
 
 
-                    <button className="join-item btn bg-red-500 hover:bg-red-500/50 cursor-default text-white">
+                    <button className="join-item btn bg-black  cursor-default text-white">
                       Page {currentPage} /{" "}
                       {produits.length % 8 == 0
                         ? Math.floor(produits.length / 8)
                         : Math.floor(produits.length / 8) + 1}
                     </button>
                     <button
-                      className="join-item btn bg-red-500 text-white hover:bg-red-500/90 
+                      className="join-item btn bg-black text-white hover:bg-red-500/90 
                                                     disabled:bg-[#d5d5d5] disabled:text-[#a0a0a0]
                                                     "
                       onClick={handleNextPage}

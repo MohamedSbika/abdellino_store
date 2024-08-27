@@ -45,16 +45,16 @@ export default function NavbarComp() {
     };
   }, [lastScrollPosition]);
 
-  const navlinkStyles = "text-white font-bold text-sm sm:text-lg md:text-sm lg:text-lg  md:mx-1 lg:mx-8  hover:text-gray-900  transform ";
+  const navlinkStyles = "text-black font-roboto font-bold sm:text-lg md:text-sm lg:text-lg  md:mx-1 lg:mx-20  hover:text-gray-900   transform ";
 
   return (
     <Navbar fluid rounded className={`fixed top-0 left-0 right-0 rounded-lg justify-between bg-transparentw-full z-50  transition-transform duration-300 ${
       scrollPosition > 0 ? (isNavbarVisible ? 'translate-y-0' : '-translate-y-full') : 'mt-0'
     }`}>
-      <div className={`flex flex-wrap rounded-lg md:flex-nowrap pt-4 pb-3 w-full items-center justify-between 
-       ${scrollPosition > 0 ? "bg-gray-800/30" : "bg-transparent"}`}>
+      <div className={`flex flex-wrap md:flex-nowrap pt-4 pb-3 w-full items-center justify-between 
+       ${scrollPosition > 0 ? "bg-gray-800/10" : "bg-transparent"}`}>
         <Navbar.Brand href="/">
-          <img src={logo} className="mr-3 h-14 sm:h-18 ml-3" alt="nom" />
+          <img src={logo} className="mr-3 h-14 sm:h-18 ml-3 rounded-full" alt="nom" />
         </Navbar.Brand>
         <div className="flex sm:mr-6 items-center md:order-2">
           <NavLink className={`ml-0 text-white font-bold text-sm sm:text-lg md:text-md lg:text-xl mx-2 sm:mx-3 md:mx-3 ${toggle ? 'hidden' : 'block'}`}>
@@ -73,19 +73,13 @@ export default function NavbarComp() {
             <img src={toggle ? Close : Hamburger} alt="menu" className="h-6 w-6" />
           </button>
         </div>
-        <Navbar.Collapse className={`w-full flex-col md:flex-row md:w-auto md:items-center ${toggle ? "block bg-gray-600/50 text-black" : "hidden"}`}>
-          <NavLink
-            className={navlinkStyles}
+        <Navbar.Collapse className={`w-full flex-col md:flex-row md:w-auto md:items-center ${toggle ? "block bg-gray-600/50 text-black" : "hidden md:block"}`}>
+        <NavLink
+            className={navlinkStyles} 
             to="/"
             end
           >
             ACCUEIL
-          </NavLink>
-          <NavLink
-            className={navlinkStyles}
-            to="/about"
-          >
-            A PROPOS
           </NavLink>
           <NavLink
             className={navlinkStyles}

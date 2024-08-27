@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import HomeStore from "../components/HomeStore";
 import React,{useEffect} from "react";
 import bg from '../img/bg-header.png'
+import Card from "../components/Card";
+import { NewProduct } from "../components/NewProduct";
 
 
 
@@ -15,11 +17,11 @@ function Homee() {
   
   return (
     <div className="App">
-      <img src={bg} className="h-32 w-full mb-32"/>
       <div>
+        <Card/>
+        <NewProduct/>
         <Card1/>
          <HomeStore/>
-        <Contact/>
         <Footer/>
        </div>
     </div>

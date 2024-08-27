@@ -39,21 +39,21 @@ const Singup = ({ userState }) => {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <input {...register("username", { required: true })} type="text" placeholder="Username" className="form_input" />
-                {errors.username && <span className='text-red-700 font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
+                {errors.username && <span className='text-black font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
 
 
                 <input {...register("email", { required: true })} type="email" placeholder="Email" className="form_input mt-5" />
-                {errors.email && <span className='text-red-700 font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
+                {errors.email && <span className='text-black font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
 
 
                 <input {...register("password", { required: true })} type="password" placeholder="Password" className="form_input mt-5" />
-                {errors.password && <span className='text-red-700 font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
+                {errors.password && <span className='text-black font-semibold text-sm mb-2 mt-1'>Ce champ est obligatoire.</span>}
 
 
                 <button
                     type='submit'
                     disabled={loading}
-                    className="btn bg-red-500 text-white mt-5 rounded-md w-full hover:bg-red-500/[.90]">
+                    className="btn bg-black text-white mt-5 rounded-md w-full hover:bg-black/[.90]">
                     {
                         loading ? 'Loading...' : 'Create an account'
                     }

@@ -68,6 +68,16 @@ export const getAllProduits = async (req, res, next) => {
   }
 };
 
+//===== Get Last Produit Added ====//
+export const getLastProduit = async (req, res, next) => {
+  try {
+    const lastProduit = await Produit.findOne().sort({ createdAt: -1 });
+    res.status(200).json(lastProduit);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 
 // //get posts number

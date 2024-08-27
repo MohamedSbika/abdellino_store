@@ -145,7 +145,7 @@ const CreateProduit = () =>{
     return (
         <main>
             <section id='admin'>
-                <img src={bg} className="h-32 w-full " />
+                <div className='h-32 w-full'></div>
                 <div className="container py-7 md:py-16 max-w-5xl">
                     <h1 className='text-center text-2xl font-heading font-bold text-black'>Ajouter Un Produit</h1>
                     <div className="mt-8 form_container">
@@ -245,7 +245,7 @@ const CreateProduit = () =>{
                                             name='type'
                                             className='form_input border-[1px] focus:border-red-500 rounded-md placeholder:text-sm'
                                             min={10} max={50}
-                                            {...register('type', { required: 'This field is required*' })}
+                                            {...register('type')}
                                         />
                                         {errors.type && <p className='text-red-700 text-xs'>{errors.type.message}</p>}
                                     </div>
@@ -265,12 +265,12 @@ const CreateProduit = () =>{
                                             multiple
                                             accept='image/*'
                                             type="file"
-                                            className={`file-input file:bg-red-500 bg-red-00 ${loading ? "md:w-4/6" : 'md:w-4/5'} w-full`} />
+                                            className={`file-input file:bg-black bg-red-00 ${loading ? "md:w-4/6" : 'md:w-4/5'} w-full`} />
                                         <button
                                             disabled={loading || imageFile.length === 0}
                                             onClick={handleImageUpload}
                                             type='button'
-                                            className={`w-full text-green-600 text-sm py-2 border-2 border-green-600 rounded-md mt-2 uppercase font-heading ${loading ? "md:w-2/6" : 'md:w-1/5'} md:h-[3rem] md:mt-0 duration-500 hover:shadow-lg disabled:border-gray-500 disabled:text-gray-500`}>
+                                            className={`w-full text-black text-sm py-2 border-2 border-black rounded-md mt-2 uppercase font-heading ${loading ? "md:w-2/6" : 'md:w-1/5'} md:h-[3rem] md:mt-0 duration-500 hover:shadow-lg disabled:border-gray-500 disabled:text-gray-500`}>
                                             {loading ? 'Uploading...' : 'Upload'}
                                         </button>
                                     </div>
@@ -292,7 +292,7 @@ const CreateProduit = () =>{
                                             <button
                                                 disabled={formData.imgUrl.length < 1 || loading || formSubmitLoading}
                                                 type='submit'
-                                                className="w-full bg-red-500 text-xl tracking-wider font-heading rounded-md hover:opacity-90 disabled:opacity-70 duration-300 text-white p-3">
+                                                className="w-full bg-black text-xl tracking-wider font-heading rounded-md hover:opacity-90 disabled:opacity-70 duration-300 text-white p-3">
                                                 {formSubmitLoading ? 'Creating...' : 'Ajouter Produit'}
                                             </button>
                                         </div>

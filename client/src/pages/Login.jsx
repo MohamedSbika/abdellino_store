@@ -43,20 +43,20 @@ const Login = () => {
 
     return (
         <>
-            <img src={bg} className="h-32 w-full "/>
+            <div className='h-32 w-full bg-transparent'></div>
 
             {
                 currentUser && currentUser.email
                     ?
                     <section className='form-section'>
                         <div className="container">
-                            <p className='text-base md:text-xl text-center text-red-500 font-heading font-bold '>User existe! Redirection au page de profile</p>
+                            <p className='text-base md:text-xl text-center text-black font-heading font-bold '>User existe! Redirection au page de profile</p>
                         </div>
                     </section>
                     :
                     <section className='form-section py-10 md:py-20 '>
                         <div className="container ">
-                            <div className="form-container px-4 sm:px-8 bg-white py-6 pb-8 sm:py-9 sm:pb-12 max-w-lg mx-auto rounded-sm border-[1px] border-red-500/50 shadow-brand shadow-red-500/40">
+                            <div className="form-container px-4 sm:px-8 bg-white py-6 pb-8 sm:py-9 sm:pb-12 max-w-lg mx-auto rounded-sm border-[1px] border-black shadow-brand shadow-black/40">
                                 <h1 className='text-left text--red-500 mb-3 font-medium font-heading text-md sm:text-xl'>
                                     {
                                         isNewUser ? "Login" : 'Create an account'
@@ -73,7 +73,7 @@ const Login = () => {
                                     {
                                         isNewUser ? "Don’t have an account?" : 'Already have an account?'
                                     }
-                                    <u className='ml-1 border--red-500 text-red-500 cursor-pointer'
+                                    <u className='ml-1 border-black text-black cursor-pointer'
                                         onClick={() => setIsNewUser(!isNewUser)}
                                     >
                                         {isNewUser ? 'Create an account' : 'Login'}

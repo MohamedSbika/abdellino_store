@@ -18,7 +18,7 @@ function Pagination({ page, className }) {
 
   return (
     <>
-      {pageCount !== 0 ? (
+      {/* {pageCount !== 0 ? (
         <Typography
           variant="body2"
           color="text.secondary"
@@ -37,7 +37,7 @@ function Pagination({ page, className }) {
         >
           Affichage 0 - 0 de {available} elements
         </Typography>
-      )}
+      )} */}
       <MuiPagination
         color="primary"
         className={className}

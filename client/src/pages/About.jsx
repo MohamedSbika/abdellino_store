@@ -10,7 +10,7 @@ export default function About() {
   }, []);
   return (
     <div>
-      <img src={bg} className="h-32 w-full mb-14"/>
+      <div className="h-32 w-full"></div>
       <AboutHeader />
       <Footer/>
     </div>

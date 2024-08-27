@@ -49,14 +49,14 @@ const ProduitCard = ({ produit }) => {
 
 
     return (
-        <div className="listing_card bg-white shadow-lg shadow-black/10  hover:shadow-brand-blue/20 rounded-sm w-full hover:shadow-lg group sm:mr-auto sm:ml-0 mx-auto">
+        <div className="listing_card bg-white shadow-lg shadow-black/10  hover:shadow-brand-blue/20 rounded-sm w-[300px] hover:shadow-lg group sm:mr-auto sm:ml-0 mx-auto">
             <div className="card-container">
                 <div
                     className="image_container relative overflow-hidden cursor-pointer"
                     onClick={() => navigate(`/produit/${_id}`)}
                 >
                     <img
-                        className='max-h-[350px] min-h-[300px] w-full object-cover rounded-t-sm hover:scale-105 duration-300'
+                        className='max-h-[200px] min-h-[200px] w-full object-cover rounded-t-sm hover:scale-105 duration-300'
                         src={imgUrl[0]} alt="property image"
                     />
                     {
@@ -74,7 +74,7 @@ const ProduitCard = ({ produit }) => {
                         className="content-container p-3 pb-0 cursor-pointer"
                         onClick={() => navigate(`/produit/${_id}`)}
                     >
-                        <h2 className="text-lg font-heading truncate uppercase duration-300 group-hover:text-red-500 ">{title}</h2>
+                        <h2 className="text-lg font-heading truncate uppercase duration-300  ">{title}</h2>
                         <p
                             className='font-content text-xs font-bold truncate flex items-center justify-start mt-1'>
                             {description}
@@ -85,13 +85,13 @@ const ProduitCard = ({ produit }) => {
 
 
                     {/* PRICE CONTAINER SECTION  */}
-                    <div className="listing_footer grid grid-cols-2 align-middle border-t border-red-500/40 mt-5 p-3 pb-4">
+                    <div className="listing_footer grid grid-cols-2 align-middle border-t  mt-5 p-3 pb-4">
 
                         <div className="price_container truncate">
                             {offer ?
-                                <p className='text-xl font-content text-red-500 font-bold  flex items-center justify-start truncate'>{discountPrix} DT <s className='text-gray-400  text-xs mt-1 ml-1'>{prix} DT</s> </p>
+                                <p className='text-xl font-content text-black font-bold  flex items-center justify-start truncate'>{discountPrix} DT <s className='text-gray-400  text-xs mt-1 ml-1'>{prix} DT</s> </p>
 
-                                : <p className='text-xl font-content text-red-500 font-bold  flex items-center justify-start truncate'>{prix} DT</p>
+                                : <p className='text-xl font-content text-black font-bold  flex items-center justify-start truncate'>{prix} DT</p>
                             }
                         </div>
                         <div className="footer_btn flex items-center justify-end mr-1">

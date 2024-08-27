@@ -198,7 +198,7 @@ export default function ProfileInfoAdmin() {
             </div>
             <div className=' py-10 flex text-center justify-center items-center sm:mt-0'>
               <button onClick={()=>setPathName(false)}
-                className='bg-red-500 text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-red-500/50'
+                className='bg-black text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 '
                 >Update</button>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function ProfileInfoAdmin() {
           <div className='sm:grid sm:grid-cols-2 '>
             <div className='flex text-center justify-center items-center'>
               <button onClick={()=>setPathName(true)}
-                className='bg-red-500 text-white px-20 mb-10 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-red-500/50'
+                className='bg-black text-white px-20 mb-10 py-10 rounded-lg text-lg font-bold hover:text-gray-900'
                 >View</button>
             </div>
             <div className='col-span-1  '>
@@ -290,7 +290,7 @@ export default function ProfileInfoAdmin() {
               <button
                 disabled={loading}
                 type="submit"
-                className="py-2 px-5 bg-red-500 text-white rounded-md w-full font-heading  mt-4 hover:opacity-90"
+                className="py-2 px-5 bg-black text-white rounded-md w-full font-heading  mt-4 hover:opacity-90"
               >
                 {loading ? "Loading..." : "Enregistrer"}
               </button>

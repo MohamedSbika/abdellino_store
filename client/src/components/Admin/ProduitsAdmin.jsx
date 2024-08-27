@@ -99,7 +99,7 @@ useEffect(() => {
                   </div>
                   <div className="flex justify-center mt-4">
                     <button
-                      className="join-item btn bg-red-500 text-white hover:bg-red-500/90 
+                      className="join-item btn bg-black text-white  
                                                     disabled:bg-[#d5d5d5] disabled:text-[#a0a0a0]
                                                     "
                       onClick={handlePrevPage}
@@ -107,14 +107,14 @@ useEffect(() => {
                     >
                       <FaAngleDoubleLeft />
                     </button>
-                    <button className="join-item btn bg-red-500 hover:bg-red-500 cursor-default text-white">
+                    <button className="join-item btn bg-black  cursor-default text-white">
                       Page {currentPage} /{" "}
                       {produits.length % 7 == 0
                         ? Math.floor(produits.length / 7)
                         : Math.floor(produits.length / 7) + 1}
                     </button>
                     <button
-                      className="join-item btn bg-red-500 text-white hover:red-500/90 
+                      className="join-item btn bg-black text-white 
                                                     disabled:bg-[#d5d5d5] disabled:text-[#a0a0a0]
                                                     "
                       onClick={handleNextPage}

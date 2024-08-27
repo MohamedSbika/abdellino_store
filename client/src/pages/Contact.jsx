@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import ContactHeader from '../components/ContactHeader'
 import Footer from '../components/Footer'
+import Form from "../components/Form";
 
 export default function Contact() {
   useEffect(() => {
@@ -9,8 +10,8 @@ export default function Contact() {
   return (
     <div>
       <ContactHeader/>
-      <Footer/>
-      
+      <Form/>
+      <Footer/> 
     </div>
   )
 }

@@ -10,6 +10,8 @@ export default {
         heading: ["KoHo", "sans-serif"],
         content: ["Open Sans", "sans-serif"],
         oswald: ["Oswald", "sans-serif"],
+        roboto: ["Roboto Condensed", "sans-serif"],
+
       },
       colors: {
         "brand-blue": `#${themeColor}`,
