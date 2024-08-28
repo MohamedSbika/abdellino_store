@@ -65,14 +65,12 @@ function FormulaireCommande() {
 
       emailjs.send('service_tspmn3e', 'template_mga2fmd', templateParams, '-xHtQ4ZSsPIab7nsU')
           .then((result) => {
-              console.log(result.text);
               alert('Message sent successfully!');
           }, (error) => {
               console.log(error.text);
               alert('Failed to send message. Please try again later.');
           });
 
-        console.log('Commande créée avec succès:', result);
         navigate('/Ticket');
       } else {
         console.error('Erreur lors de la création de la commande:', response.statusText);
