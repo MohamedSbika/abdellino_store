@@ -30,7 +30,7 @@ export default function Form() {
         const templateParams = {
             from_email: formData.email,
             message: formData.message,
-            subject: produit.title,
+            subject: formData.subject,
             to_name: "abdellino"
         };
 

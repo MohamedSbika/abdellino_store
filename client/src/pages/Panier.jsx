@@ -1,34 +1,37 @@
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import ProduitCard from '../components/ProduitCard';
 import Footer from '../components/Footer';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateArray } from '../redux/user/userSlice';
-import bg from '../img/bg-header.png'
-
+import { useNavigate } from 'react-router-dom';
 
 const Panier = () => {
     const navigate = useNavigate();
-    const { saveProduits } = useSelector(state => state.savedProduit);
-       
     const dispatch = useDispatch();
+    const { saveProduits } = useSelector(state => state.savedProduit);
+    
+    const [quantities, setQuantities] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const initializeQuantities = (produits) => {
-        return produits.map(produit => ({
+    useEffect(() => {
+        setQuantities(saveProduits.map(produit => ({
             id: produit._id,
             name: produit.title,
             quantity: 1,
-            price:produit.offer ? produit.discountPrix : produit.prix
-        })
-    );
-    };
-
-    const [quantities, setQuantities] = useState(initializeQuantities(saveProduits));
-
-    // Update quantities whenever saveProduits changes
-    useEffect(() => {
-        setQuantities(initializeQuantities(saveProduits));
+            price: produit.offer ? produit.discountPrix : produit.prix
+        })));
     }, [saveProduits]);
+
+    const handleQuantityChange = (id, quantity) => {
+        setQuantities(prevQuantities =>
+            prevQuantities.map(item =>
+                item.id === id ? { ...item, quantity: Math.max(0, quantity) } : item
+            )
+        );
+    };
 
     const increment = (id) => {
         setQuantities(prevQuantities =>
@@ -38,14 +41,6 @@ const Panier = () => {
         );
     };
 
-    const handleQuantityChange=(id,qt)=>{
-        setQuantities(prevQuantities =>
-            prevQuantities.map(item =>
-                item.id === id ? { ...item, quantity: qt } : item
-            )
-        );
-    }
-
     const decrement = (id) => {
         setQuantities(prevQuantities =>
             prevQuantities.map(item =>
@@ -54,86 +49,96 @@ const Panier = () => {
         );
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateArray(quantities));
-        console.log("here")
-        console.log(quantities)
         navigate('/formulaire');
     };
+
     const calculateTotalPrice = () => {
         return quantities.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const paginate = (items) => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        return items.slice(startIndex, startIndex + itemsPerPage);
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(prev => prev + 1);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(prev => (prev > 1 ? prev - 1 : 1));
+    };
+
+    const filteredProduits = saveProduits.filter(produit =>
+        produit.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <>
-                  <img src={bg} className="h-32 w-full"/>
-
-
-            <section>
-                <div className="container">
-                    <div className="heading_container border-b-2 pb-5 border-[#3A5A40] flex items-center justify-center sm:justify-between flex-col sm:flex-row gap-3">
-                        <h1 className='font-heading text-2xl text-left'>Votre Panier Des Produits</h1>
+            <div className='h-24 w-full bg-white'></div>
+            <section className='pt-32'>
+                <div className='grid md:grid-cols-2 lg:grid-cols-3'>
+                    <div className='text-xl col-span-1 flex items-center text-center justify-center pb-4 md:text-5xl font-bold'>
+                        VOTRE PANIER
                     </div>
-                    <div className="listings pt-5">
-                        {saveProduits.length === 0 ? (
-                            <div className='py-20'>
-                                <p className='bg-white text-center text-sm sm:text-2xl font-heading font-bold flex flex-col items-center justify-center max-w-3xl mx-auto py-10 text-black px-5 rounded shadow-md'>
-                                    <span>Votre Panier Des Produits est vide.</span>
-                                </p>
+
+                </div>
+
+                <div className='pb-10 pt-2'>
+                    {quantities.length === 0 ? (
+                        <div className='mt-40 flex items-center justify-center flex-col'>
+                            <FaAngleDoubleRight className='font-3xl text-[#3A5A40] font-bold text-xl text-center' />
+                            <p className='font-heading text-lg text-center text-[#3A5A40]'>
+                                Votre panier est vide
+                            </p>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 px-5 gap-y-8'>
+                                {paginate(filteredProduits).map(produit => {
+                                    const quantityObject = quantities.find(item => item.id === produit._id);
+                                    const quantity = quantityObject ? quantityObject.quantity : 1;
+                                    return (
+                                        <div key={produit._id} className=''>
+                                            <ProduitCard produit={produit} />
+                                            <div className="flex items-center justify-center mt-4">
+                                                <button
+                                                    className="px-3 py-2 text-xl bg-gray-200 text-gray-500 border-0 rounded-l-lg hover:bg-gray-300"
+                                                    type="button"
+                                                    onClick={() => decrement(produit._id)}
+                                                >
+                                                    &mdash;
+                                                </button>
+                                                <input
+                                                    className="w-16 px-3 py-2 text-xl text-center border-0"
+                                                    type="number"
+                                                    value={quantity}
+                                                    onChange={e => handleQuantityChange(produit._id, parseInt(e.target.value, 10))}
+                                                />
+                                                <button
+                                                    className="px-3 py-2 text-xl bg-gray-200 text-gray-500 border-0 rounded-r-lg hover:bg-gray-300"
+                                                    type="button"
+                                                    onClick={() => increment(produit._id)}
+                                                >
+                                                    &#xff0b;
+                                                </button>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
-                        ) : (
-                            <form className='text-center justify-center md:grid md:grid-cols-4'>
-                                <div className='col-span-3'>
-                                    <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 px-5 gap-y-8 pb-20">
-                                        {saveProduits.map(produit => {
-                                            const quantityObject = quantities.find(item => item.id === produit._id);
-                                            const quantity = quantityObject ? quantityObject.quantity : 1;
-                                            return (
-                                                <div key={produit._id} className='text-center'>
-                                                    <ProduitCard produit={produit} />
-                                                    <div className="flex items-center justify-center rounded-lg">
-                                                        <button
-                                                            className="quantity-input__modifier quantity-input__modifier--left px-3 py-2 text-xl bg-gray-200 text-gray-500 border-0 rounded-l-lg cursor-pointer hover:bg-gray-300 hover:text-gray-700"
-                                                            type="button"
-                                                            onClick={() => decrement(produit._id)}
-                                                        >
-                                                            &mdash;
-                                                        </button>
-                                                        <input
-                                                            className="quantity-input__screen w-16 px-3 py-2 text-xl text-center border-0"
-                                                            type="text"
-                                                            value={quantity}
-                                                            onChange={e => handleQuantityChange(produit._id, parseInt(e.target.value, 10))}
-                                                        />
-                                                        <button
-                                                            className="quantity-input__modifier quantity-input__modifier--right px-3 py-2 text-xl bg-gray-200 text-gray-500 border-0 rounded-r-lg cursor-pointer hover:bg-gray-300 hover:text-gray-700"
-                                                            type="button"
-                                                            disabled={quantity===produit.quantite}
-                                                            onClick={() => increment(produit._id)}
-                                                        >
-                                                            &#xff0b;
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                   
-                                </div>
-                                <div>
-                                    <p className='text-lg font-bold'>Prix totale: {calculateTotalPrice()}</p>
-                                    <button type="button" onClick={handleSubmit} className='mt-8 flex items-center justify-center text-sm w-full rounded-md px-6 py-3 bg-red-500 hover:bg-red-600 text-white'>
-                                        Passer Commande
-                                    </button>
-                                </div>
-                            </form>
-                        )}
-                    </div>
+                            <div className='text-center mt-8'>
+                                <p className='text-lg font-bold'>Prix total: {calculateTotalPrice()}</p>
+                                <button type="submit" className='mt-4 px-6 py-3 bg-black hover:bg-gray-800 text-white rounded-md'>
+                                    Passer Commande
+                                </button>
+                            </div>
+                           
+                        </form>
+                    )}
                 </div>
             </section>
             <Footer />

@@ -6,7 +6,9 @@ const initialState = {
   signinError: null,
   error: null,
   myArray: [],
-  myMaterialArray:[], // New array to be added to the state
+  myMaterialArray: [], // New array to be added to the state
+  cart: [], // For storing items in the cart for authenticated and guest users
+  orders: [], // For storing orders for authenticated and guest users
 };
 
 const userSlice = createSlice({
@@ -50,11 +52,30 @@ const userSlice = createSlice({
     signoutSuccess: (state) => {
       state.loading = false;
       state.currentUser = null;
+      state.cart = []; // Clear cart on sign out
+      state.orders = []; // Clear orders on sign out
       state.error = false;
     },
     signoutFailed: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+
+    // Handle cart actions
+    addToCart: (state, action) => {
+      state.cart.push(action.payload);
+    },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter(item => item.id !== action.payload.id);
+    },
+    clearCart: (state) => {
+      state.cart = [];
+    },
+
+    // Handle order actions
+    placeOrder: (state, action) => {
+      state.orders.push(action.payload);
+      state.cart = []; // Clear cart after placing order
     },
 
     // Handle produit SAVED ITEMS
@@ -67,11 +88,9 @@ const userSlice = createSlice({
     updateArray: (state, action) => {
       state.myArray = action.payload;
     },
-    deleteArray:(state)=>{
-      state.myArray=[];
+    deleteArray: (state) => {
+      state.myArray = [];
     },
-
-    
   },
 });
 
@@ -85,11 +104,14 @@ export const {
   userDeleteFail,
   signoutSuccess,
   signoutFailed,
+  addToCart,
+  removeFromCart,
+  clearCart,
+  placeOrder,
   handleSave,
   handleProduitRemove,
   updateArray,
   deleteArray,
-
 } = userSlice.actions;
 
 export default userSlice.reducer;

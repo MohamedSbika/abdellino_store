@@ -84,8 +84,8 @@ function FormulaireCommande() {
 
   return (
     <div>
-       <img src={bg} className="h-32 w-full "/>
-      <div className="max-w-md mx-auto bg-white p-8 mt-10 rounded-lg shadow-md">
+       <div className='w-full h-32 bg-transparent'></div>
+      <div className="max-w-md mx-auto bg-white p-8 mt-10 rounded-lg shadow-md mb-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Formulaire de Commande</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -151,7 +151,7 @@ function FormulaireCommande() {
 
           <button
             type="submit"
-            className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-500/50 transition duration-200"
+            className="w-full bg-black text-white py-2 px-4 rounded-lg hover:bg-red-500/50 transition duration-200"
           >
             Valider Commande
           </button>

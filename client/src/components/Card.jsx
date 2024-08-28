@@ -1,5 +1,5 @@
 import React from 'react';
-import Cover from "../img/cover.jpg";
+import Cover from "../img/c.jpg";
 import { useNavigate } from 'react-router-dom'; // Assurez-vous d'importer useNavigate
 
 const Card = () => {

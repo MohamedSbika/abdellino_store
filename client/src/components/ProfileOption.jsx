@@ -56,11 +56,6 @@ const ProfileOption = ({ user }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to={`/panier`} className="justify-start text-black">
-                            <FaShoppingCart className='text-gray-800' /> Panier
-                        </Link>
-                    </li>
-                    <li>
                         <Link to={`/Ticket`} className="justify-start text-black">
                             <FaTicketAlt className='text-gray-800' /> Ticket Des Produits
                         </Link>

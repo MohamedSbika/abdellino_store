@@ -18,24 +18,24 @@ export default function Profile() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div>
-      <img src={bg} className="h-32 w-full mb-32"/>
+    <div className=''>
+      <div className='w-full h-64 bg-transparent'></div>
         {!pathname.includes('profileUpdate')?
-          <div className='sm:grid sm:grid-cols-2 -mt-20 '>
+          <div className='sm:grid sm:grid-cols-2 -mt-20 mb-24 '>
             <div className='col-span-1 '>
                 {<Outlet/>}
             </div>
             <div className=' py-10 flex text-center justify-center items-center sm:mt-0'>
               <button onClick={()=>navigate("profileUpdate")}
-                className='bg-red-500 text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-red-500/50'
+                className='bg-gray-700 text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-gray-500/50'
                 >Update</button>
             </div>
           </div>
           :
-          <div className='sm:grid sm:grid-cols-2 -mt-20'>
+          <div className='sm:grid sm:grid-cols-2 -mt-20 mb-24'>
             <div className='flex text-center justify-center items-center'>
               <button onClick={()=>navigate("/profile")}
-                className='bg-red-500 text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-red-500/50'
+                className='bg-gray-700 text-white px-20 py-10 rounded-lg text-lg font-bold hover:text-gray-900 hover:bg-gray-500/50'
                 >View</button>
             </div>
             <div className='col-span-1  '>

@@ -33,7 +33,7 @@ function Ticket() {
     let yPosition = 100;
     commande.listeP.forEach((produit, index) => {
       doc.text(
-        `${produit.name || 'N/A'} - Quantité : ${produit.quantity || 'N/A'} - Prix par Unité : ${produit.price || 'N/A'} €`,
+        `${produit.name || 'N/A'} - Quantité : ${produit.quantity || 'N/A'} - Prix par Unité : ${produit.price || 'N/A'} DT`,
         30,
         yPosition
       );
@@ -44,7 +44,7 @@ function Ticket() {
     const totalPrice = commande.listeP.reduce(
       (total, produit) => total + (produit.price * (produit.quantity || 0)), 0
     );
-    doc.text(`Prix Total : ${totalPrice} €`, 20, yPosition + 10);
+    doc.text(`Prix Total : ${totalPrice} DT`, 20, yPosition + 10);
 
     // Save the PDF
     doc.save("commande.pdf");
@@ -87,13 +87,13 @@ function Ticket() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <img src={bg} className="h-64 w-full object-cover" alt="Header Background" />
+      <div className='w-full h-32 bg-transparent'></div>
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {commandes.map((commande, index) => {
           const totalPrice = commande.listeP.reduce((total, produit) => total + (produit.price * (produit.quantity || 0)), 0);
 
           return (
-            <div key={index} className="max-w-xl mx-auto bg-white p-4 mb-4 rounded-lg shadow-md">
+            <div key={index} className="max-w-xl mx-auto bg-white p-4 mb-4 rounded-lg shadow-md mb-8">
               <h2 className="text-2xl font-bold mb-3 text-center">Détails de la Demande</h2>
               <div className="mb-2">
                 <strong>Nom :</strong> {commande.nom}
@@ -117,17 +117,17 @@ function Ticket() {
                     <li key={index} className="mb-2">
                       <strong>Nom :</strong> {produit.name || 'N/A'} <br />
                       <strong>Quantité :</strong> {produit.quantity || 'N/A'} <br />
-                      <strong>Prix par Unité :</strong> {produit.price || 'N/A'} €
+                      <strong>Prix par Unité :</strong> {produit.price || 'N/A'} DT
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="mt-2">
-                <strong>Prix Total :</strong> {totalPrice} €
+                <strong>Prix Total :</strong> {totalPrice} DT
               </div>
               <div className='mt-2 flex items-center justify-center'>
               <button onClick={()=>generatePDF(commande)} 
-                   className="md:w-full xl:w-auto py-4 mr-6 px-7 bg-blue-500 text-white font-heading rounded-md  hover:opacity-90 text-sm"
+                   className="md:w-full xl:w-auto py-4 mr-6 px-7 bg-gray-600 text-white font-heading rounded-md  hover:opacity-90 text-sm"
                     >Generate Ticket</button>
               </div>
             </div>

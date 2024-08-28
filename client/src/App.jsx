@@ -37,12 +37,14 @@ function App() {
           <Route path="/store" element={<Store />} />
           {/*<Route path='/search?' element={<Search />} />*/}
           <Route path='/produit/:id' element={<ProduitPage />} />
+          <Route path="/panier" element={<Panier />} />
+          <Route path="/Formulaire" element={<FormulaireCommande />} />
+
+
 
           {/* /---------Private Routes-----------/ */}
           <Route element={<PrivateRoute />}>
             {/*<Route path='/profile' element={<Profile />} />*/}
-            <Route path="/panier" element={<Panier />} />
-            <Route path="/Formulaire" element={<FormulaireCommande />} />
             <Route path="/Ticket" element={<Ticket />} />
             <Route path="/create_produit" element={<CreateProduit />} />
             <Route path="/update_produit/:id" element={<UpdateProduit />} />
