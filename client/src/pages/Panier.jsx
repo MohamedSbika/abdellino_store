@@ -144,6 +144,7 @@ const Panier = () => {
             <Footer />
         </>
     );
-};
+}; 
+
 
 export default Panier;
