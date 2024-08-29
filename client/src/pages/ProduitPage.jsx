@@ -1,15 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import emailjs from 'emailjs-com';
 import { toast } from 'react-toastify';
 import bg from '../img/bg-header.png';
 import Footer from "../components/Footer";
+import { handleSave, handleProduitRemove, clearSavedProduit } from '../redux/saveProduit/saveProduitSlice'
+
 
 const ProduitPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    const { saveProduits } = useSelector(state => state.savedProduit)
+    
+
+    const dispatch = useDispatch()
+
+    const handleProduitsSave = (id) => {
+        if (currentUser && currentUser.email) {
+            const isSaved = saveProduits.some(saveProduit => saveProduit._id === id);
+            if (isSaved) {
+                toast.info("Ce produit est déjà dans votre panier", {
+                    autoClose: 2000,
+                });
+            } else {
+                // Add product to the cart if it's not already saved
+                const produitToAdd = produit;
+                dispatch(handleSave(produitToAdd));
+                toast.success("Produit ajouté au panier avec succès", {
+                    autoClose: 2000,
+                });
+            }
+        } else {
+            // Redirect to login if the user is not logged in
+            navigate('/login');
+        }
+    };
+    
 
     const navigate = useNavigate();
     const { currentUser } = useSelector(state => state.user);
@@ -100,7 +128,7 @@ const ProduitPage = () => {
     return (
         <div>
             <div className='h-[84px] w-full bg-white'></div>
-            <div className="md:grid md:grid-cols-2 px-5 pt-10">
+            <div className="md:grid md:grid-cols-2 px-5 pt-10 mb-24">
                 <div className="px-2 pr-10">
                     {/* Main Image */}
                     <img src={mainImage} className="h-[30vw] w-[20vw] ml-72 object-cover" alt="Main Product" />
@@ -161,12 +189,20 @@ const ProduitPage = () => {
                             </div>
                             <button
                                 onClick={handleSubmit}
-                                className=" w-auto py-4 px-7 bg-red-500 text-white font-heading hover:opacity-90 text-sm"
+                                className=" w-auto py-4 px-7 bg-gray-500 text-white font-heading hover:opacity-90 text-sm"
                             >
                                 ENVOYER
                             </button>
                         </div>
                     )}
+                    <div>
+                    <button
+    onClick={() => handleProduitsSave(produit._id)} 
+    className=" w-auto py-4 px-7 bg-gray-500 text-white font-heading hover:opacity-90 text-sm"
+                            >
+                                AJOUTER AU PANIER
+                            </button>           
+                    </div>
                 </div>
             </div>
             <Footer />
