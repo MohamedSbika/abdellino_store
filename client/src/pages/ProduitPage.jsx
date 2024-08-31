@@ -140,9 +140,6 @@ const ProduitPage = () => {
                     
                     }
             } catch (error) {
-                toast.error(error.message, {
-                    autoClose: 2000,
-                });
                 console.log(error);
             }
         };
