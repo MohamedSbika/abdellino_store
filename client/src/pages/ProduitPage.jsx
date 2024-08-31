@@ -115,26 +115,29 @@ const ProduitPage = () => {
                     setProduit(json);
                     setMainImage(json.imgUrl[0]);
                      // Set the main image to the first image
-                    try {
-                        const res = await fetch(`http://localhost:4000/abdellino/produits/${id.id}`, {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": 'application/json'
-                            },
-                            body: JSON.stringify({
-                                ...json,
-                                ['visite']: json.visite+1,
-                                userRef: currentUser._id
-                            })
-                        });
-                        const serverRes = await res.json();
-                        if (serverRes.success === false) {
-                            toast.error(serverRes.message, { autoClose: 2000 });
-                        }   
-                    } catch (error){
-                        toast.error(error.message, { autoClose: 2000 });
-
+                    if (currentUser.role === "user"){
+                        try {
+                            const res = await fetch(`http://localhost:4000/abdellino/produits/${id.id}`, {
+                                method: 'PUT',
+                                headers: {
+                                    "Content-Type": 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    ...json,
+                                    ['visite']: json.visite+1,
+                                    userRef: currentUser._id
+                                })
+                            });
+                            const serverRes = await res.json();
+                            if (serverRes.success === false) {
+                                toast.error(serverRes.message, { autoClose: 2000 });
+                            }   
+                        } catch (error){
+                            toast.error(error.message, { autoClose: 2000 });
+    
+                        }
                     }
+                    
                     }
             } catch (error) {
                 toast.error(error.message, {
