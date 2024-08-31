@@ -37,6 +37,11 @@ const produitSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    visite:{
+      required:true,
+      type:Number,
+      default:0
+    }
   },
   { timestamps: true }
 );

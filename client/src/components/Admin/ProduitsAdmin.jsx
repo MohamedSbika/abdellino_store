@@ -73,8 +73,8 @@ useEffect(() => {
     }
 }
   return (
-    <div className='bg-[#f1f5f1]'>
-      <div className="grid post_card grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-6 md:h-full overflow-scroll pb-10 px-4 scrollbar-hide md:pt-5 ">
+    <div className='bg-[#f1f5f1] pb-16'>
+      <div className="grid post_card grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-6 md:h-full overflow-scroll pb-10  px-4 scrollbar-hide md:pt-5 ">
                     {/* ADD NEW Project BUTTON  */}
                     <div className="cursor-pointer rounded-md  bg-white  shadow-lg hover:shadow-xl">
                       <button

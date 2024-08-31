@@ -231,7 +231,6 @@ function TicketsAdmin() {
         })}
       </div>
 
-      <Footer />
     </div>
   );
 }

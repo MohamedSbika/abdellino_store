@@ -113,8 +113,29 @@ const ProduitPage = () => {
                     });
                 } else {
                     setProduit(json);
-                    setMainImage(json.imgUrl[0]); // Set the main image to the first image
-                }
+                    setMainImage(json.imgUrl[0]);
+                     // Set the main image to the first image
+                    try {
+                        const res = await fetch(`http://localhost:4000/abdellino/produits/${id.id}`, {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": 'application/json'
+                            },
+                            body: JSON.stringify({
+                                ...json,
+                                ['visite']: json.visite+1,
+                                userRef: currentUser._id
+                            })
+                        });
+                        const serverRes = await res.json();
+                        if (serverRes.success === false) {
+                            toast.error(serverRes.message, { autoClose: 2000 });
+                        }   
+                    } catch (error){
+                        toast.error(error.message, { autoClose: 2000 });
+
+                    }
+                    }
             } catch (error) {
                 toast.error(error.message, {
                     autoClose: 2000,
@@ -172,14 +193,14 @@ const ProduitPage = () => {
                         <div className="h-[15vh] mb-20 flex flex-column items-center ">
                             <div className=" w-[70%] mr-10">
                                 <input
-                                    className=" border-black p-2 shadow-md shadow-gray-500 w-full mb-5"
+                                    className=" border-black p-2  w-full mb-5"
                                     placeholder="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                 />
                                 <textarea
-                                    className=" border-black p-2 shadow-md shadow-gray-500 w-full"
+                                    className=" border-black p-2  w-full"
                                     placeholder="message"
                                     id="body"
                                     name="message"

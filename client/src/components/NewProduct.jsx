@@ -49,7 +49,7 @@ export const NewProduct = () => {
             <div className="relative flex items-end justify-end p-8 h-full mr-48">
 
                 <div
-                    className="bg-gray-200 p-8 rounded-lg shadow-lg max-w-md text-center flex flex-col items-center"
+                    className="bg-gray-200 p-8 rounded-lg  max-w-md text-center flex flex-col items-center"
                     data-aos="fade-up" 
                 >
                     <h2 className="text-4xl font-bold mb-4" data-aos="fade-right">
@@ -71,7 +71,7 @@ export const NewProduct = () => {
     onClick={() => navigate(`/produit/${produit._id}`)} // Use produit._id to navigate correctly
     className="inline-block px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-300 mt-6 cursor-pointer"
                     >
-                        SHOP NOW 
+                        VOIR DETAILS
                     </a>
                 </div>
             </div>

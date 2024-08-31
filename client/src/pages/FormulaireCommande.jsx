@@ -35,6 +35,11 @@ function FormulaireCommande() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.phone.length < 8) {
+      alert("Le numéro de téléphone doit contenir au moins 8 caractères.");
+      return;
+    }
+
     const data = {
       idUser: userId,
       listeP: myArray,
@@ -128,6 +133,7 @@ function FormulaireCommande() {
               value={formData.phone}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+              minLength={8}
             />
           </div>
 
