@@ -134,7 +134,7 @@ const UpdateProduit = () => {
     return (
         <main>
             <section id='admin'>
-            <img src={bg} className="h-32 w-full "/>
+            <div className='w-full h-32 bg-transparent'></div>
             <div className="container py-7 md:py-16 max-w-5xl">
                     <h1 className='text-center text-2xl font-heading font-bold text-black'>
                         Modifier Un Produit
@@ -238,7 +238,7 @@ const UpdateProduit = () => {
                                             
                                             multiple accept='image/*'
                                             type="file"
-                                            className={`file-input file:bg-red-500 bg-red-00 ${loading ? "md:w-4/6" : 'md:w-4/5'} w-full`} 
+                                            className={`file-input file:bg-black bg-red-00 ${loading ? "md:w-4/6" : 'md:w-4/5'} w-full`} 
                                         />
                                         <button
                                             disabled={loading || imageFile.length === 0}
@@ -266,7 +266,7 @@ const UpdateProduit = () => {
                                             <button
                                                 disabled={formData.imgUrl.length < 1 || loading || formSubmitLoading}
                                                 type='submit'
-                                                className="w-full bg-red-500 text-xl tracking-wider font-heading rounded-md hover:opacity-90 disabled:opacity-70 duration-300 text-white p-3"
+                                                className="w-full bg-black text-xl tracking-wider font-heading rounded-md hover:opacity-90 disabled:opacity-70 duration-300 text-white p-3"
                                             >
                                                 {formSubmitLoading ? 'Updating...' : 'modifier Produit'}
                                             </button>
