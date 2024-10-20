@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "../models/user.models.js";
 import { throwError } from "../utils/error.js";
 import jwt from "jsonwebtoken";

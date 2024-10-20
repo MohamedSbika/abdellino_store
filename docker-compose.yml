@@ -1,0 +1,35 @@
+services:
+  api:
+    image: node:18
+    container_name: apiAbdelli
+    working_dir: /app
+    command: sh -c "npm install -g nodemon && nodemon index.js"
+    ports:
+      - "4000:4000"
+    volumes:
+      - "./api/:/app"
+
+  web:
+    build:
+      context: ./client  
+    container_name: webAbdelli
+    ports:
+      - "5173:5173"
+    volumes:
+      - "./client/:/src"
+      - /src/node_modules  
+
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongoAbdelli
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: hamma
+      MONGO_INITDB_ROOT_PASSWORD: hamma
+    ports:
+      - "27017:27017" 
+    volumes:
+      - db-data:/data/db
+
+volumes:
+  db-data: {}

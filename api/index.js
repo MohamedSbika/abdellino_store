@@ -7,10 +7,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import 'dotenv/config'; // Assurez-vous que dotenv est correctement configuré
-import userRouter from "./api/routes/user.route.js";
-import authRouter from "./api/routes/auth.route.js";
-import produitRouter from "./api/routes/produit.route.js";
-import commandeRouter from "./api/routes/commande.route.js";
+import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
+import produitRouter from "./routes/produit.route.js";
+import commandeRouter from "./routes/commande.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
