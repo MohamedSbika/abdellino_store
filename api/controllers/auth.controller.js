@@ -4,11 +4,21 @@ import { throwError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { passwordGenarator, usernameGenarator } from "../utils/helper.js";
 
-//======handle singup route ===========//
+//======handle signup route ===========//
 export const singup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body; // Ajoutez le rôle ici
+
+  // Hachage du mot de passe
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = new User({ username, email, password: hashedPassword });
+
+  // Créez un nouvel utilisateur avec le rôle spécifié ou le rôle par défaut
+  const newUser = new User({ 
+    username, 
+    email, 
+    password: hashedPassword, 
+    role: role || 'user' // Utilisez le rôle spécifié ou 'user' par défaut
+  });
+
   try {
     await newUser.save();
     res.status(201).json({
@@ -19,6 +29,7 @@ export const singup = async (req, res, next) => {
     next(error);
   }
 };
+
 
 // ========sing in route handling here =====//
 export const signin = async (req, res, next) => {

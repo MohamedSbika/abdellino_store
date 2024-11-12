@@ -22,6 +22,7 @@ import TicketsAdmin from './components/Admin/TicketsAdmin'
 import ProfileView from './components/ProfileView'
 import ProfileUpdate from './components/ProfileUpdate'
 import StatsAdmin from './components/Admin/StatsAdmin'
+import AdminRoute from './components/AdminRoute'
 function App() {
   return (
     <>
@@ -44,20 +45,21 @@ function App() {
 
           {/* /---------Private Routes-----------/ */}
           <Route element={<PrivateRoute />}>
-            {/*<Route path='/profile' element={<Profile />} />*/}
             <Route path="/Ticket" element={<Ticket />} />
-            <Route path="/create_produit" element={<CreateProduit />} />
-            <Route path="/update_produit/:id" element={<UpdateProduit />} />
+            
             <Route path="/profile" element={<Profile />} >
               <Route index element={<ProfileView/>}/>
               <Route path="profileUpdate"element={<ProfileUpdate/>}/>
             </Route>
-
+            <Route element={<AdminRoute/>}>
+            <Route path="/create_produit" element={<CreateProduit/>} />
+            <Route path="/update_produit/:id" element={<UpdateProduit/>} />
             <Route path="/admin" element={<Admin/>}>
                 <Route path="profile" element={<ProfilInfoAdmin/>}/>
                 <Route path="produits"element={<ProduitsAdmin/>}/>
                 <Route path="ticketsP" element={<TicketsAdmin/>}/>
                 <Route index element={<StatsAdmin/>}/>
+            </Route>
             </Route>
 
 

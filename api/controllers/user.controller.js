@@ -1,6 +1,6 @@
 import User from "../models/user.models.js";
 import { throwError } from "../utils/error.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 
 export const getUser = async (req, res, next) => {
