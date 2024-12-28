@@ -1,8 +1,14 @@
-FROM node:lts-alpine
+FROM node:18
+
 WORKDIR /app
-COPY package.json ./ 
-RUN npm install 
-COPY . ./ 
+
+COPY package.json ./
+
+# Utilisation de l'option --legacy-peer-deps pour ignorer les conflits
+RUN npm install --legacy-peer-deps
+
+COPY . .
+
 EXPOSE 4000
 
 CMD ["nodemon", "index.js"]
