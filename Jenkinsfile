@@ -20,7 +20,7 @@ pipeline {
 
         stage('Build Server Image') {
             steps {
-                dir('server') {
+                dir('api') {
                     script {
                         dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
                     }
