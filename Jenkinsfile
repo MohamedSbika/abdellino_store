@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub') 
-        IMAGE_NAME_SERVER = 'sbika/serverAbdelli'  
-        IMAGE_NAME_CLIENT = 'sbika/clientAbdelli' 
+        IMAGE_NAME_SERVER = 'sbika/serverabdelli'  
+        IMAGE_NAME_CLIENT = 'sbika/clientabdelli' 
     }
 
     stages {
