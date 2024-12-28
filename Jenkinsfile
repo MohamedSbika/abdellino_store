@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub') 
-        IMAGE_NAME_SERVER = 'sbika/apiAbdelli'  
-        IMAGE_NAME_CLIENT = 'sbika/clientAbdelli'
+        IMAGE_NAME_SERVER = 'sbika/serverAbdelli'  
+        IMAGE_NAME_CLIENT = 'sbika/clientAbdelli' 
     }
 
     stages {
@@ -18,44 +18,44 @@ pipeline {
             }
         }
 
-        stage('Build and Push Docker Images') {
+        stage('Build Server Image') {
+            steps {
+                dir('server') {
+                    script {
+                        dockerImageServer = docker.build("${IMAGE_NAME_SERVER}")
+                    }
+                }
+            }
+        }
+
+        stage('Build Client Image') {
+            steps {
+                dir('client') {
+                    script {
+                        dockerImageClient = docker.build("${IMAGE_NAME_CLIENT}")
+                    }
+                }
+            }
+        }
+
+        stage('Test Docker Hub Login') {
+            steps {
+                sh '''
+                echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
+                '''
+            }
+        }
+
+        stage('Push Images to Docker Hub') {
             steps {
                 script {
-                    // Vérification si le daemon Docker est opérationnel
-                    sh 'docker info'
-
-                    // Build les images via Docker Compose
                     sh """
-                    docker-compose -f docker-compose.yml build
                     echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
-                    docker tag apiAbdelli ${IMAGE_NAME_SERVER}
-                    docker tag webAbdelli ${IMAGE_NAME_CLIENT}
                     docker push ${IMAGE_NAME_SERVER}
                     docker push ${IMAGE_NAME_CLIENT}
                     """
                 }
             }
-        }
-
-        stage('Deploy Services') {
-            steps {
-                script {
-                    // Déployer les services avec Docker Compose
-                    sh """
-                    docker-compose down
-                    docker-compose up -d
-                    """
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Check the logs for errors.'
         }
     }
 }
