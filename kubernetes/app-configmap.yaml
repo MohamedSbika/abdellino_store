@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+data:
+  API_PORT: "4000"
+  MONGO_HOST: "mongoAbdelli"
+  MONGO_PORT: "27017"
+  MONGO_USER: "hamma"
+  MONGO_PASSWORD: "hamma"
+  CLIENT_PORT: "5173"
