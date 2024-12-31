@@ -4,10 +4,10 @@ metadata:
   name: client-service
 spec:
   selector:
-    app: mern-client
+    app: web-abdelli
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
-      nodePort: 30002
+  - protocol: TCP
+    port: 80
+    targetPort: 5173
+    nodePort: 30002
   type: NodePort

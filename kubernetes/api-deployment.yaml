@@ -2,21 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-deployment
+  labels:
+    app: api-abdelli
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: mern-server
+      app: api-abdelli
   template:
     metadata:
       labels:
-        app: mern-server
+        app: api-abdelli
     spec:
       containers:
-      - name: mern-server
+      - name: api-abdelli
         image: sbika/serverabdelli:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 4000
         envFrom:
         - configMapRef:
             name: app-configmap

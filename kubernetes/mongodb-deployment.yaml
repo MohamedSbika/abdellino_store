@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: mongo-deployment
   labels:
-    app: mongodb
+    app: mongo-abdelli
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
+      app: mongo-abdelli
   template:
     metadata:
       labels:
-        app: mongodb
+        app: mongo-abdelli
     spec:
       containers:
-      - name: mongodb
+      - name: mongo-abdelli
         image: mongo:latest
         ports:
         - containerPort: 27017
