@@ -17,3 +17,7 @@ env:
 
 ingress:
   enabled: false
+
+# Ajout de la section ServiceAccount
+serviceAccount:
+  create: false  # Définir à true si vous voulez créer un ServiceAccount, ou à false si vous ne voulez pas en créer un
