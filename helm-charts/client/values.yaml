@@ -1,0 +1,24 @@
+replicaCount: 3
+
+image:
+  repository: sbika/clientabdelli
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5173
+
+env:
+  - name: REACT_APP_SERVER_URL
+    value: http://server-service:4000
+
+ingress:
+  enabled: true
+  annotations: {}
+  hosts:
+    - host: mern-app.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []

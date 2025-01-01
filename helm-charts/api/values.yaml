@@ -1,0 +1,15 @@
+replicaCount : 3
+image :
+repository : sbika/serverabdelli
+tag : latest
+pullPolicy : IfNotPresent
+service :
+type : ClusterIP
+port : 4000
+env :
+- name : MONGO_URI
+value : mongodb://hamma:hamma@mongoAbdelli:27017/abdellino?authSource=admin
+- name : PORT
+value : "4000"
+ingress :
+enabled : false
