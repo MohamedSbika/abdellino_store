@@ -24,7 +24,7 @@ serviceAccount:
 
 # Ajout de la section Autoscaling
 autoscaling:
-  enabled: true  # Activer l'auto-scaling (ou mettre false si vous ne voulez pas l'activer)
+  enabled: false  # Activer l'auto-scaling (ou mettre false si vous ne voulez pas l'activer)
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
