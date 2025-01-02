@@ -20,5 +20,10 @@ ingress:
     - host: mern-app.local
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix  # Utilisez "Prefix" pour une gestion correcte des chemins
   tls: []
+  
+# Ajout de la configuration pour le service account
+serviceAccount:
+  create: true  # Créez un service account si nécessaire
+  name: ""  # Si vous ne voulez pas spécifier un nom spécifique, laissez vide.
