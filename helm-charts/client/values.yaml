@@ -15,13 +15,14 @@ env:
 
 ingress:
   enabled: true
-  annotations: {}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
     - host: mern-app.local
       paths:
         - path: /
-          pathType: Prefix  # Utilisez "Prefix" pour une gestion correcte des chemins
-  tls: []
+          pathType: Prefix
 
 # Ajout de la configuration pour le service account
 serviceAccount:
