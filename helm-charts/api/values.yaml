@@ -21,9 +21,8 @@ ingress:
 
 # Ajout de la section ServiceAccount
 serviceAccount:
-  create: true
-  name: api
-  namespace: argocdsbika  # # Créer le ServiceAccount
+  create: true  # Créez un service account si nécessaire
+  name: "" # # Créer le ServiceAccount
 
 # Ajout de la section Autoscaling
 autoscaling:
