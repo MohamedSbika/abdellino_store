@@ -49,10 +49,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: MONGO_URI
-              value: {{ .Values.env.MONGO_URI | quote }}
-            - name: PORT
-              value: {{ .Values.env.PORT | quote }}
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}

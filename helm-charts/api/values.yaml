@@ -10,23 +10,18 @@ service:
   port: 4000
 
 env:
-  - name: MONGO_URI
-    value: mongodb://hamma:hamma@mongoAbdelli:27017/abdellino?authSource=admin
-  - name: PORT
-    value: "4000"
-
+  MONGO_URI: "mongodb://hamma:hamma@mongoAbdelli:27017/abdellino?authSource=admin"
+  PORT: "4000"
 
 ingress:
   enabled: false
 
-# Ajout de la section ServiceAccount
 serviceAccount:
-  create: true  # Créez un service account si nécessaire
-  name: "" # # Créer le ServiceAccount
+  create: true
+  name: ""
 
-# Ajout de la section Autoscaling
 autoscaling:
-  enabled: false  # Activer l'auto-scaling (ou mettre false si vous ne voulez pas l'activer)
+  enabled: false
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
