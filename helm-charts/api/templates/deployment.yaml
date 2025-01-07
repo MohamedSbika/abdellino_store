@@ -5,9 +5,11 @@ metadata:
   labels:
     {{- include "api.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: {{- if .Values.autoscaling.enabled }} 
+             {{ .Values.autoscaling.minReplicas }} 
+             {{- else }} 
+             {{ .Values.replicaCount }} 
+             {{- end }}
   selector:
     matchLabels:
       {{- include "api.selectorLabels" . | nindent 6 }}
@@ -46,6 +48,11 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: MONGO_URI
+              value: {{ .Values.env.MONGO_URI | quote }}
+            - name: PORT
+              value: {{ .Values.env.PORT | quote }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
