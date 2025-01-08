@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: client-deployment
   labels:
-    app: webAbdelli
+    app: web-abdelli
 spec:
   replicas: 2
   selector:
@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: web-abdelli
+      annotations:
+        prometheus.io/scrape: "true"      # Activer le scraping
+        prometheus.io/port: "5173"       # Port pour les métriques
+        prometheus.io/path: "/metrics"  # Chemin des métriques
     spec:
       containers:
       - name: web-abdelli

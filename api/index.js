@@ -1,9 +1,3 @@
-//  .env :
-//    MONGO_URI=mongodb+srv://abdellino9:IUK8EqsFNUlT1Rg4@cluster0.acxyh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-//    JWT_SECRET=abdellinoStore
-
-
-
 import express from "express";
 import mongoose from "mongoose";
 import 'dotenv/config'; // Assurez-vous que dotenv est correctement configuré
@@ -17,7 +11,9 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import http from "http";
 import { Server } from "socket.io";
+import promClient from "prom-client";  // Import de prom-client pour les métriques
 
+// Initialisation de l'application Express
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -28,6 +24,41 @@ app.use(cors({
 
 const expressServer = http.createServer(app);
 const PORT = process.env.PORT || 4000;
+
+// Créer un registre Prometheus pour collecter les métriques
+const register = new promClient.Registry();
+
+// Collecte des métriques par défaut (comme le nombre de requêtes HTTP)
+promClient.collectDefaultMetrics({ register });
+
+// Créer des métriques personnalisées pour les requêtes HTTP
+const httpRequestsTotal = new promClient.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests made',
+  labelNames: ['method', 'code']
+});
+
+// Ajouter un middleware pour compter les requêtes HTTP
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    // Incrémenter le compteur pour les requêtes HTTP
+    httpRequestsTotal.inc({
+      method: req.method,
+      code: res.statusCode
+    });
+  });
+  next();
+});
+
+// Exposer les métriques Prometheus à l'endpoint /metrics
+app.get('/metrics', async (req, res) => {
+  try {
+    res.set('Content-Type', promClient.register.contentType);
+    res.end(await register.metrics());  // Exposer les métriques
+  } catch (err) {
+    res.status(500).end(err);
+  }
+});
 
 // Connect to the database
 const mongoUri = process.env.MONGO_URI;
@@ -44,8 +75,6 @@ app.use("/abdellino/users", userRouter);
 app.use("/abdellino/auth", authRouter);
 app.use("/abdellino/produits", produitRouter);
 app.use("/abdellino/commandes", commandeRouter);
-
-
 
 // Deployment settings
 const __dirname = path.resolve();
@@ -77,8 +106,6 @@ const io = new Server(expressServer, {
     credentials: true,
   },
 });
-
-
 
 // Start server
 expressServer.listen(PORT, () => {

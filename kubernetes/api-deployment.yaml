@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: api-abdelli
+      annotations:
+        prometheus.io/scrape: "true"      # Activer le scraping pour ce service
+        prometheus.io/port: "4000"       # Port d'exposition des métriques
+        prometheus.io/path: "/metrics"  # Chemin des métriques
     spec:
       containers:
       - name: api-abdelli

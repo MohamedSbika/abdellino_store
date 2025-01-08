@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: mongo-abdelli
+      annotations:
+        prometheus.io/scrape: "true"      # Activer le scraping
+        prometheus.io/port: "9216"       # Port exposé par MongoDB Exporter
+        prometheus.io/path: "/metrics"  # Chemin des métriques
     spec:
       containers:
       - name: mongo-abdelli
@@ -24,3 +28,10 @@ spec:
           value: "hamma"
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "hamma"
+      - name: mongodb-exporter
+        image: bitnami/mongodb-exporter:latest
+        ports:
+        - containerPort: 9216
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://hamma:hamma@localhost:27017"

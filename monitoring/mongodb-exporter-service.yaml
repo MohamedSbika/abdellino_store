@@ -1,17 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: client-service
+  name: mongodb-exporter-service
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: "80"
+    prometheus.io/port: "9216"
     prometheus.io/path: "/metrics"
 spec:
   selector:
-    app: web-abdelli
+    app: mongodb-exporter
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 5173
-    nodePort: 30002
-  type: NodePort
+    port: 9216
+    targetPort: 9216
+  type: ClusterIP
